@@ -2,15 +2,35 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Gesture</title>
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body>
-<h1>Gesture</h1>
-<h2>Choose a Topic</h2>
-<ul>
-    <li><a href="/topic/gesture-basics">Gesture Basics</a></li>
-    <li><a href="/topic/gesture-basic-shapes">Gesture Basic Shapes</a></li>
-    <li><a href="/gesture/timed">Timed Gesture Training</a></li>
-</ul>
+<div class="container">
+    <h1>Gesture</h1>
+    <h2>Select a Topic</h2>
+    <div class="course-wrapper">
+        <a href="/topic/gesture-basics" class="course-card">
+            <div class="image-placeholder"></div>
+            <div class="course-info">
+                <h3>Gesture Introduction</h3>
+                <p>Learn the fundamentals of gesture drawing.</p>
+            </div>
+        </a>
+        <a href="/topic/gesture-basic-shapes" class="course-card">
+            <div class="image-placeholder"></div>
+            <div class="course-info">
+                <h3>Gesture Basic Shapes</h3>
+                <p>Improve your understanding of gesture shapes and forms.</p>
+            </div>
+        </a>
+        <a href="/gesture/timed" class="course-card">
+            <div class="image-placeholder"></div>
+            <div class="course-info">
+                <h3>Timed Gesture Training</h3>
+                <p>Practice gestures with timed sessions for better flow.</p>
+            </div>
+        </a>
+    </div>
+</div>
 </body>
 </html>

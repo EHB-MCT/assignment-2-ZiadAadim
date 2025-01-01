@@ -2,17 +2,42 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <title>Perspective</title>
-  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body>
-<h1>Perspective</h1>
-<h2>Choose a Topic</h2>
-<ul>
-  <li><a href="/topic/perspective-introduction">Perspective Introduction</a></li>
-  <li><a href="/topic/foreshortening-basics">Foreshortening Basics</a></li>
-  <li><a href="/topic/low-angle">Low Angle</a></li>
-  <li><a href="/topic/high-angle">High Angle</a></li>
-  <li><a href="/topic/fisheye">Fisheye</a></li>
-</ul>
+<div class="container">
+  <h1>Perspective</h1>
+  <h2>Select a Topic</h2>
+  <div class="course-wrapper">
+    <a href="/topic/perspective-introduction" class="course-card">
+      <div class="image-placeholder"></div>
+      <div class="course-info">
+        <h3>Perspective Introduction</h3>
+        <p>Understand the basics of perspective in drawing.</p>
+      </div>
+    </a>
+    <a href="/topic/foreshortening-basics" class="course-card">
+      <div class="image-placeholder"></div>
+      <div class="course-info">
+        <h3>Foreshortening Basics</h3>
+        <p>Learn how to depict depth with foreshortening techniques.</p>
+      </div>
+    </a>
+    <a href="/topic/low-angle" class="course-card">
+      <div class="image-placeholder"></div>
+      <div class="course-info">
+        <h3>Low Angle</h3>
+        <p>Explore drawing from a low-angle perspective.</p>
+      </div>
+    </a>
+    <a href="/topic/high-angle" class="course-card">
+      <div class="image-placeholder"></div>
+      <div class="course-info">
+        <h3>High Angle</h3>
+        <p>Master high-angle perspectives to enhance depth.</p>
+      </div>
+    </a>
+  </div>
+</div>
 </body>
 </html>
