@@ -1,0 +1,74 @@
+
+body {
+    background-color: lightgrey;
+    margin-bottom: 100px;
+}
+
+h1 {
+    padding-top : 40px;
+}
+h1, h2 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    margin-top: 30px; /* Adjust spacing if necessary */
+}
+
+/* Center the titles on the page */
+.container h1, .container h2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+/* Course Wrapper Styling */
+.course-wrapper {
+    display: flex;
+    flex-direction: column; /* Stack cards vertically */
+    gap: 20px; /* Space between cards */
+    margin-top: 40px;
+    align-items: center; /* Center the cards */
+}
+
+/* Course Card Styling */
+.course-card {
+    display: flex;
+    align-items: center; /* Align content inside the card horizontally */
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 0px;
+    padding: 20px;
+    width: 90%; /* Elongate horizontally */
+    max-width: 800px; /* Limit the maximum width */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: left; /* Align text to the left */
+    transition: transform 0.3s ease;
+}
+
+.course-card:hover {
+    transform: scale(1.02); /* Subtle zoom effect on hover */
+}
+
+/* Image Placeholder Styling */
+.image-placeholder {
+    width: 170px;
+    height: 120px;
+    background-color: #4caf50; /* Green placeholder */
+    border-radius: 8px;
+    margin-right: 20px; /* Space between image and text */
+}
+
+/* Course Info Styling */
+.course-info h3 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.course-info p {
+    font-size: 14px;
+    color: #666;
+    margin: 0;
+}
+
+

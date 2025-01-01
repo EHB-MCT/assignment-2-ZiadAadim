@@ -9,15 +9,38 @@ import org.springframework.web.bind.annotation.RequestParam
 @Controller
 class CourseController(val repository: InteractionRepository) {
 
-    @GetMapping("/")
-    fun home(model: Model): String {
-        model.addAttribute("courses", listOf("Heads", "Torso", "Arms", "Legs"))
-        return "home"
+    @GetMapping("/welcome")
+    fun welcome(): String {
+        return "welcome"
     }
 
-    @PostMapping("/track")
-    fun trackData(@RequestParam action: String, @RequestParam module: String): String {
-        repository.save(Interaction(action = action, module = module))
-        return "redirect:/"
+    @GetMapping("/main")
+    fun mainPage(): String {
+        return "main"
+    }
+
+    @GetMapping("/course/anatomy")
+    fun anatomyPage(): String {
+        return "anatomy"
+    }
+
+    @GetMapping("/course/perspective")
+    fun perspectivePage(): String {
+        return "perspective"
+    }
+
+    @GetMapping("/course/gesture")
+    fun gesturePage(): String {
+        return "gesture"
+    }
+
+    @GetMapping("/gesture/timed")
+    fun timedGesturePage(): String {
+        return "gesture-timed"
+    }
+
+    @GetMapping("/course/reference")
+    fun referencePage(): String {
+        return "reference"
     }
 }
