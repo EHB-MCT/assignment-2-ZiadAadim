@@ -7,6 +7,6 @@ import org.springframework.boot.runApplication
 class TrueDataTrackingZiadAadimApplication
 
 fun main(args: Array<String>) {
+	// Start the Spring Boot application
 	runApplication<TrueDataTrackingZiadAadimApplication>(*args)
-InitQuestions().Question()
 }
