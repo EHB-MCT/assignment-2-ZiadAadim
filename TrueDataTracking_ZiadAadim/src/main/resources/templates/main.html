@@ -2,8 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Character Illustration Trainer</title>
-    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/css/styles.css}">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="static/css/js/scripts.js"></script>
 </head>
 <body>
 <div class="container">
@@ -40,6 +41,57 @@
         </a>
     </div>
 </div>
+<div id="terms-modal" class="modal">
+    <div class="modal-content">
+        <h3>Terms of Use</h3>
+        <p>
+            By using this application, you agree to the tracking of your interactions
+            to enhance user experience and improve the app.
+            Your data will remain anonymous and will only be used for analytics.
+        </p>
+        <label>
+            <input type="checkbox" id="accept-terms"> I accept the terms of use
+        </label>
+        <button id="continue-btn" disabled>Continue</button>
+    </div>
+</div>
+ <script>
+     window.addEventListener('load', () => {
+         // Check if the modal has already been shown in this session
+         if (!sessionStorage.getItem('termsModalShown')) {
+             setTimeout(() => {
+                 const modal = document.getElementById('terms-modal');
+                 if (modal) {
+                     modal.style.display = 'flex'; // Show the modal
+                     sessionStorage.setItem('termsModalShown', 'true'); // Set flag
+                 } else {
+                     console.error('Modal element not found');
+                 }
+             }, 3000); // Wait for 3 seconds
+         }
+     });
+
+     // Enable the Continue button when the checkbox is checked
+     document.addEventListener('DOMContentLoaded', () => {
+         const checkbox = document.getElementById('accept-terms');
+         const continueBtn = document.getElementById('continue-btn');
+
+         if (checkbox && continueBtn) {
+             checkbox.addEventListener('change', () => {
+                 console.log('Checkbox state changed:', checkbox.checked); // Debugging log
+                 continueBtn.disabled = !checkbox.checked; // Enable button if checked
+             });
+         } else {
+             console.error('Checkbox or continue button not found');
+         }
+
+         // Close the modal and proceed
+         continueBtn.addEventListener('click', () => {
+             document.getElementById('terms-modal').style.display = 'none';
+         });
+     });
+ </script>
+
 </body>
 </html>
 
