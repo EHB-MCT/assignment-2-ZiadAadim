@@ -24,7 +24,7 @@
                 <p>Learn to draw human heads with proper proportions.</p>
             </div>
         </a>
-        <a href="/loading" class="course-card">
+        <a href="/loading" class="course-card" onclick="logHandsClick(event)">
             <div class="image-placeholder"></div>
             <div class="course-info">
                 <h3>Hands</h3>
@@ -54,6 +54,38 @@
         </a>
     </div>
 </div>
+
+<script>
+    function logHandsClick(event) {
+        // Prevent default behavior (navigation)
+        event.preventDefault();
+
+        // Log the click event to the backend
+        fetch('/api/events/anatomy/hands', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                userId: "dummy_user", // Replace with dynamic user ID if available
+                eventType: "BUTTON_CLICK",
+                page: "hands",
+                buttonClicked: "hands_section",
+                timestamp: new Date().toISOString()
+            })
+        })
+            .then(response => {
+                if (response.ok) {
+                    console.log("Hands section click logged!");
+                } else {
+                    console.error("Failed to log hands click.");
+                }
+            });
+
+        // Navigate to the link after logging
+        window.location.href = "/loading";
+    }
+</script>
 </body>
 </html>
 
