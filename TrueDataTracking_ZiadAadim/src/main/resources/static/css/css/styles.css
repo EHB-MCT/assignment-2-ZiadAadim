@@ -140,3 +140,35 @@ h1, h2 {
     background-color: #2980b9;
 }
 
+/*___________________________*/
+
+/* Disabled Course Card Styling */
+.course-card.coming-soon {
+    position: relative; /* Allows positioning of the label */
+    background-color: #ccc; /* Grey background */
+    cursor: not-allowed; /* Disable hover effects */
+    pointer-events: none; /* Prevent interaction */
+    border: 1px solid #aaa; /* Subtle border */
+    color: lightsteelblue; /* Lighter text color */
+}
+
+.course-card.coming-soon:hover {
+    transform: none; /* Disable hover effects */
+    background-color: #ccc; /* Maintain grey background */
+}
+
+/* Coming Soon Label Styling */
+.coming-soon-label {
+    position: absolute;
+    top: 10px; /* Position label above the card */
+    right: 10px; /* Position label to the right */
+    background-color: #e74c3c; /* Red background */
+    color: white; /* White text */
+    font-size: 14px;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-transform: uppercase;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+

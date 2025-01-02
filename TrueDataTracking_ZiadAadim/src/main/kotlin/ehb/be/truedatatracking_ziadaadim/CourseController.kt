@@ -43,4 +43,13 @@ class CourseController(val repository: InteractionRepository) {
     fun referencePage(): String {
         return "reference"
     }
+
+    @Controller
+    class CourseController {
+
+        @GetMapping("/loading")
+        fun showLoadingPage(): String {
+            return "loading"
+        }
+    }
 }
