@@ -11,28 +11,28 @@
   <h2>Select a Topic</h2>
   <a href="/main" class="back-button">Go Back</a>
   <div class="course-wrapper">
-    <a href="/loading" class="course-card">
+    <a href="/loading" class="course-card" onclick="logCardClick(event, 'perspective', 'Perspective Introduction')">
       <div class="image-placeholder"></div>
       <div class="course-info">
         <h3>Perspective Introduction</h3>
         <p>Understand the basics of perspective in drawing.</p>
       </div>
     </a>
-    <a href="/loading" class="course-card">
+    <a href="/loading" class="course-card" onclick="logCardClick(event, 'perspective', 'Foreshortnening basics')">
       <div class="image-placeholder"></div>
       <div class="course-info">
         <h3>Foreshortening Basics</h3>
         <p>Learn how to depict depth with foreshortening techniques.</p>
       </div>
     </a>
-    <a href="/loading" class="course-card">
+    <a href="/loading" class="course-card" onclick="logCardClick(event, 'perspective', 'Low Angle')">
       <div class="image-placeholder"></div>
       <div class="course-info">
         <h3>Low Angle</h3>
         <p>Explore drawing from a low-angle perspective.</p>
       </div>
     </a>
-    <a href="/loading" class="course-card">
+    <a href="/loading" class="course-card" onclick="logCardClick(event, 'perspective', 'High Angle')">
       <div class="image-placeholder"></div>
       <div class="course-info">
         <h3>High Angle</h3>
@@ -41,5 +41,40 @@
     </a>
   </div>
 </div>
+
+<script>
+  function logCardClick(event, page, section) {
+    event.preventDefault(); // Prevent navigation
+    const data = {
+      eventType: "BUTTON_CLICK",
+      page: page,
+      buttonClicked: section,
+      timestamp: new Date().toISOString(),
+      userId: "dummy_user" // Replace with actual user ID if available
+    };
+
+    fetch('/api/events/log', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+            .then(response => {
+              if (response.ok) {
+                console.log(`${section} click logged on page: ${page}`);
+              } else {
+                console.error("Failed to log click event.");
+              }
+            })
+            .catch(error => console.error("Error logging click:", error));
+
+    // Navigate to the link after logging
+    const href = event.target.closest("a").getAttribute("href");
+    if (href) {
+      window.location.href = href;
+    }
+  }
+</script>
 </body>
 </html>

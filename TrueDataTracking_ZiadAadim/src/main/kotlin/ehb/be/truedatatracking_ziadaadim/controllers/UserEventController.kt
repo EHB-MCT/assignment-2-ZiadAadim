@@ -19,17 +19,5 @@ class UserEventController(private val userEventService: UserEventService) {
     fun getAllEvents(): List<UserEvent> {
         return userEventService.getAllEvents()
     }
-
-    @PostMapping("/anatomy/hands")
-    fun logHandsClick(): String {
-        val dummyEvent = UserEvent(
-            userId = "dummy_user", // Replace with actual user ID logic later
-            eventType = "BUTTON_CLICK",
-            page = "hands",
-            buttonClicked = "hands_section",
-            timestamp = LocalDateTime.now()
-        )
-        userEventService.logEvent(dummyEvent)
-        return "Hands section click logged!"
-    }
+    
 }

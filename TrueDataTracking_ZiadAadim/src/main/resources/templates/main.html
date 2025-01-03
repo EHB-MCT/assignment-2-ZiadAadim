@@ -11,28 +11,28 @@
     <h1>Character Illustration Trainer</h1>
     <h2>Select a Course</h2>
     <div class="course-wrapper">
-        <a href="/course/anatomy" class="course-card">
+        <a href="/course/anatomy" class="course-card" onclick="logCardClick(event, 'Main page', 'Anatomy')">
             <div class="image-placeholder"></div>
             <div class="course-info">
                 <h3>Anatomy</h3>
                 <p>Learn about the structure of the human body and its parts.</p>
             </div>
         </a>
-        <a href="/course/perspective" class="course-card">
+        <a href="/course/perspective" class="course-card" onclick="logCardClick(event, 'Main page', 'Perspective')">
             <div class="image-placeholder"></div>
             <div class="course-info">
                 <h3>Perspective</h3>
                 <p>Master the techniques of creating depth and perspective in art.</p>
             </div>
         </a>
-        <a href="/course/gesture" class="course-card">
+        <a href="/course/gesture" class="course-card" onclick="logCardClick(event, 'Main page', 'Gesture')">
             <div class="image-placeholder"></div>
             <div class="course-info">
                 <h3>Gesture</h3>
                 <p>Improve your ability to capture poses and motion in drawings.</p>
             </div>
         </a>
-        <div class="course-card coming-soon">
+        <div class="course-card coming-soon" onclick="logCardClick(event, 'Main page', 'Coming soon')">
             <div class="image-placeholder"></div>
             <div class="course-info">
                 <h3>References</h3>
@@ -68,7 +68,7 @@
                  } else {
                      console.error('Modal element not found');
                  }
-             }, 3000); // Wait for 3 seconds
+             }, 2000); // Wait for 3 seconds
          }
      });
 
@@ -91,7 +91,43 @@
              document.getElementById('terms-modal').style.display = 'none';
          });
      });
- </script>
+
+
+         // General event logger for all course cards
+         function logCardClick(event, page, section) {
+         event.preventDefault(); // Prevent navigation
+         const data = {
+         eventType: "BUTTON_CLICK",
+         page: page,
+         buttonClicked: section,
+         timestamp: new Date().toISOString(),
+         userId: "dummy_user" // Replace with actual user ID if available
+     };
+
+         fetch('/api/events/log', {
+         method: 'POST',
+         headers: {
+         'Content-Type': 'application/json'
+     },
+         body: JSON.stringify(data)
+     })
+         .then(response => {
+         if (response.ok) {
+         console.log(`${section} click logged on page: ${page}`);
+     } else {
+         console.error("Failed to log click event.");
+     }
+     })
+         .catch(error => console.error("Error logging click:", error));
+
+         // Navigate to the link after logging
+         const href = event.target.closest("a").getAttribute("href");
+         if (href) {
+         window.location.href = href;
+     }
+     }
+
+</script>
 
 </body>
 </html>

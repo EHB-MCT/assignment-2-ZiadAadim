@@ -10,42 +10,42 @@
     <h2>Select a Topic</h2>
     <a href="/main" class="back-button">Go Back</a>
     <div class="course-wrapper">
-        <a href="/loading" class="course-card">
+        <a href="/loading" class="course-card" onclick="logCardClick(event, 'anatomy', 'Anatomy Introduction')">
             <div class="image-placeholder"></div>
             <div class="course-info">
                 <h3>Anatomy Introduction</h3>
                 <p>An overview of human anatomy for artists.</p>
             </div>
         </a>
-        <a href="/loading" class="course-card">
+        <a href="/loading" class="course-card" onclick="logCardClick(event, 'anatomy', 'Head')">
             <div class="image-placeholder"></div>
             <div class="course-info">
                 <h3>Head</h3>
                 <p>Learn to draw human heads with proper proportions.</p>
             </div>
         </a>
-        <a href="/loading" class="course-card" onclick="logHandsClick(event)">
+        <a href="/loading" class="course-card" onclick="logCardClick(event, 'anatomy', 'Hands')">
             <div class="image-placeholder"></div>
             <div class="course-info">
                 <h3>Hands</h3>
                 <p>Master the intricate details of drawing hands.</p>
             </div>
         </a>
-        <a href="/loading" class="course-card">
+        <a href="/loading" class="course-card" onclick="logCardClick(event, 'anatomy', 'Torso')">
             <div class="image-placeholder"></div>
             <div class="course-info">
                 <h3>Torso</h3>
                 <p>Understand the structure and proportions of the torso.</p>
             </div>
         </a>
-        <a href="/loading" class="course-card">
+        <a href="/loading" class="course-card" onclick="logCardClick(event, 'anatomy', 'Legs')">
             <div class="image-placeholder"></div>
             <div class="course-info">
                 <h3>Legs</h3>
                 <p>Learn to draw legs with proper anatomy and proportions.</p>
             </div>
         </a>
-        <a href="/loading" class="course-card">
+        <a href="/loading" class="course-card" onclick="logCardClick(event, 'anatomy', 'Feet')">
             <div class="image-placeholder"></div>
             <div class="course-info">
                 <h3>Feet</h3>
@@ -56,34 +56,37 @@
 </div>
 
 <script>
-    function logHandsClick(event) {
-        // Prevent default behavior (navigation)
-        event.preventDefault();
+    function logCardClick(event, page, section) {
+        event.preventDefault(); // Prevent navigation
+        const data = {
+            eventType: "BUTTON_CLICK",
+            page: page,
+            buttonClicked: section,
+            timestamp: new Date().toISOString(),
+            userId: "dummy_user" // Replace with actual user ID if available
+        };
 
-        // Log the click event to the backend
-        fetch('/api/events/anatomy/hands', {
+        fetch('/api/events/log', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({
-                userId: "dummy_user", // Replace with dynamic user ID if available
-                eventType: "BUTTON_CLICK",
-                page: "hands",
-                buttonClicked: "hands_section",
-                timestamp: new Date().toISOString()
-            })
+            body: JSON.stringify(data)
         })
             .then(response => {
                 if (response.ok) {
-                    console.log("Hands section click logged!");
+                    console.log(`${section} click logged on page: ${page}`);
                 } else {
-                    console.error("Failed to log hands click.");
+                    console.error("Failed to log click event.");
                 }
-            });
+            })
+            .catch(error => console.error("Error logging click:", error));
 
         // Navigate to the link after logging
-        window.location.href = "/loading";
+        const href = event.target.closest("a").getAttribute("href");
+        if (href) {
+            window.location.href = href;
+        }
     }
 </script>
 </body>
