@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service
 @Service
 class UserService(private val userRepository: UserRepository) {
 
-    fun createUser(sessionId: String): User {
-        val newUser = User(sessionId = sessionId)
+    fun createUser(sessionId: String, userId: String): User {
+        val newUser = User(sessionId = sessionId, userId = userId)
         return userRepository.save(newUser)
     }
 
@@ -16,4 +16,3 @@ class UserService(private val userRepository: UserRepository) {
         return userRepository.findBySessionId(sessionId)
     }
 }
-

@@ -18,3 +18,15 @@
 - Ensured the modal requires users to accept the terms before continuing.
 - Used **sessionStorage** to show the modal only once per session.
 - Verified that the modal does not reappear on page reloads or navigation within the same session.
+
+## Checkpoint 4: Backend Data Tracking
+- Implemented backend tracking for user interactions with MongoDB.
+- Tracked the following data:
+    - Time spent on each page.
+    - Clicks on cards (e.g., Anatomy, Perspective, Gesture, etc.).
+    - Navigation patterns across the website.
+    - User's session-based `userId`.
+- Added functionality to generate a unique `userId` for each session using a 10-digit code.
+- Fixed issues where cards were non-clickable, ensuring smooth interaction throughout the website.
+- Updated database integration to log all events with the correct `userId`.
+- Tested the system thoroughly to ensure data is accurately logged in MongoDB for every user interaction.

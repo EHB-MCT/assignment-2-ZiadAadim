@@ -2,12 +2,11 @@ package ehb.be.truedatatracking_ziadaadim.models
 
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
-import java.time.LocalDateTime
 
 @Document(collection = "users")
 data class User(
-    @Id
-    val id: String? = null,
+    @Id val id: String? = null,
     val sessionId: String,
-    val createdAt: LocalDateTime = LocalDateTime.now()
+    val userId: String
 )
+

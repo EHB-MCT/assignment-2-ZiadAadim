@@ -93,41 +93,112 @@
      });
 
 
-         // General event logger for all course cards
-         function logCardClick(event, page, section) {
+     // General event logger for all course cards
+     function logCardClick(event, page, section) {
          event.preventDefault(); // Prevent navigation
          const data = {
-         eventType: "BUTTON_CLICK",
-         page: page,
-         buttonClicked: section,
-         timestamp: new Date().toISOString(),
-         userId: "dummy_user" // Replace with actual user ID if available
-     };
+             eventType: "BUTTON_CLICK",
+             page: page,
+             buttonClicked: section,
+             timestamp: new Date().toISOString(),
+             userId: "dummy_user" // Replace with actual user ID if available
+         };
 
          fetch('/api/events/log', {
-         method: 'POST',
-         headers: {
-         'Content-Type': 'application/json'
-     },
-         body: JSON.stringify(data)
-     })
-         .then(response => {
-         if (response.ok) {
-         console.log(`${section} click logged on page: ${page}`);
-     } else {
-         console.error("Failed to log click event.");
-     }
-     })
-         .catch(error => console.error("Error logging click:", error));
+             method: 'POST',
+             headers: {
+                 'Content-Type': 'application/json'
+             },
+             body: JSON.stringify(data)
+         })
+             .then(response => {
+                 if (response.ok) {
+                     console.log(`${section} click logged on page: ${page}`);
+                 } else {
+                     console.error("Failed to log click event.");
+                 }
+             })
+             .catch(error => console.error("Error logging click:", error));
 
          // Navigate to the link after logging
          const href = event.target.closest("a").getAttribute("href");
          if (href) {
-         window.location.href = href;
-     }
+             window.location.href = href;
+         }
      }
 
-</script>
+
+
+     window.addEventListener('load', () => {
+         // Generate and store a unique user ID if not already set
+         let userId = sessionStorage.getItem('userId');
+         if (!userId) {
+             userId = `user_${Math.random().toString(36).substr(2, 10)}`;
+             sessionStorage.setItem('userId', userId);
+             console.log("Generated new User ID:", userId);
+
+             // Send the user ID to the backend
+             fetch('/api/events/accept-terms', {
+                 method: 'POST',
+                 headers: {
+                     'Content-Type': 'application/json'
+                 },
+                 body: JSON.stringify({ userId: userId })
+             })
+                 .then(response => {
+                     if (response.ok) {
+                         console.log("User ID registered successfully");
+                     } else {
+                         console.error("Failed to register User ID");
+                     }
+                 })
+                 .catch(error => console.error("Error registering User ID:", error));
+         }
+     });
+
+     // Function to log card clicks
+     function logCardClick(event, page, section) {
+         event.preventDefault(); // Prevent navigation
+
+         const userId = sessionStorage.getItem('userId');
+         if (!userId) {
+             console.error("User ID not set!");
+             return;
+         }
+
+         const data = {
+             eventType: "BUTTON_CLICK",
+             page: page,
+             buttonClicked: section,
+             timestamp: new Date().toISOString(),
+             userId: userId
+         };
+
+         fetch('/api/events/log', {
+             method: 'POST',
+             headers: {
+                 'Content-Type': 'application/json'
+             },
+             body: JSON.stringify(data)
+         })
+             .then(response => {
+                 if (response.ok) {
+                     console.log(`Logged ${section} click on page: ${page}`);
+                 } else {
+                     console.error("Failed to log event.");
+                 }
+             })
+             .catch(error => console.error("Error logging event:", error));
+
+         const href = event.target.closest("a").getAttribute("href");
+         if (href) {
+             window.location.href = href;
+         }
+     }
+
+
+
+ </script>
 
 </body>
 </html>
