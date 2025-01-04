@@ -43,14 +43,23 @@
 </div>
 
 <script>
+  // General event logger for all course cards
   function logCardClick(event, page, section) {
     event.preventDefault(); // Prevent navigation
+
+    // Retrieve userId from sessionStorage
+    const userId = sessionStorage.getItem("userId");
+    if (!userId) {
+      console.error("User ID not set!");
+      return;
+    }
+
     const data = {
       eventType: "BUTTON_CLICK",
       page: page,
       buttonClicked: section,
       timestamp: new Date().toISOString(),
-      userId: "dummy_user" // Replace with actual user ID if available
+      userId: userId
     };
 
     fetch('/api/events/log', {

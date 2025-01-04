@@ -1,18 +1,14 @@
 package ehb.be.truedatatracking_ziadaadim.controllers
 
-import ehb.be.truedatatracking_ziadaadim.models.User
 import ehb.be.truedatatracking_ziadaadim.models.UserEvent
 import ehb.be.truedatatracking_ziadaadim.services.UserEventService
-import ehb.be.truedatatracking_ziadaadim.services.UserService
 import org.springframework.web.bind.annotation.*
-import java.util.UUID
 import jakarta.servlet.http.HttpSession
 
 @RestController
 @RequestMapping("/api/events")
 class UserEventController(
     private val userEventService: UserEventService,
-    private val userService: UserService // Add the userService here
 ) {
 
     @PostMapping("/log")
