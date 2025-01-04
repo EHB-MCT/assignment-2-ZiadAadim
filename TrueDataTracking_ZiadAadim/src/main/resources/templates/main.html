@@ -68,7 +68,7 @@
                  } else {
                      console.error('Modal element not found');
                  }
-             }, 2000); // Wait for 3 seconds
+             }, 1000); // Wait for 3 seconds
          }
      });
 
@@ -91,41 +91,6 @@
              document.getElementById('terms-modal').style.display = 'none';
          });
      });
-
-
-     // General event logger for all course cards
-     function logCardClick(event, page, section) {
-         event.preventDefault(); // Prevent navigation
-         const data = {
-             eventType: "BUTTON_CLICK",
-             page: page,
-             buttonClicked: section,
-             timestamp: new Date().toISOString(),
-             userId: "dummy_user" // Replace with actual user ID if available
-         };
-
-         fetch('/api/events/log', {
-             method: 'POST',
-             headers: {
-                 'Content-Type': 'application/json'
-             },
-             body: JSON.stringify(data)
-         })
-             .then(response => {
-                 if (response.ok) {
-                     console.log(`${section} click logged on page: ${page}`);
-                 } else {
-                     console.error("Failed to log click event.");
-                 }
-             })
-             .catch(error => console.error("Error logging click:", error));
-
-         // Navigate to the link after logging
-         const href = event.target.closest("a").getAttribute("href");
-         if (href) {
-             window.location.href = href;
-         }
-     }
 
 
 
@@ -156,8 +121,24 @@
          }
      });
 
-     // Function to log card clicks
-     function logCardClick(event, page, section) {
+
+     let startTime = null;
+
+     // Start the timer when the page loads
+     window.addEventListener('load', () => {
+         startTime = new Date(); // Record the start time
+
+         // Add event listener for the "Go Back" button
+         const backButton = document.querySelector('.back-button');
+         if (backButton) {
+             backButton.addEventListener('click', (event) => {
+                 logButtonClick(event, 'Go Back');
+             });
+         }
+     });
+
+     // Function to log button clicks and calculate time spent
+     function logButtonClick(event, buttonName) {
          event.preventDefault(); // Prevent navigation
 
          const userId = sessionStorage.getItem('userId');
@@ -166,11 +147,16 @@
              return;
          }
 
+         const endTime = new Date(); // Record the end time
+         const timeSpent = Math.round((endTime - startTime) / 1000); // Calculate time spent in seconds
+
+         const page = document.title; // Use the page title as the current page
          const data = {
              eventType: "BUTTON_CLICK",
              page: page,
-             buttonClicked: section,
-             timestamp: new Date().toISOString(),
+             buttonClicked: buttonName,
+             timeSpent: timeSpent,
+             timestamp: endTime.toISOString(),
              userId: userId
          };
 
@@ -183,7 +169,7 @@
          })
              .then(response => {
                  if (response.ok) {
-                     console.log(`Logged ${section} click on page: ${page}`);
+                     console.log(`Logged "${buttonName}" click on page: ${page}, Time Spent: ${timeSpent}s`);
                  } else {
                      console.error("Failed to log event.");
                  }
@@ -195,6 +181,51 @@
              window.location.href = href;
          }
      }
+
+     // Function to log card clicks
+     function logCardClick(event, page, section) {
+         event.preventDefault(); // Prevent navigation
+
+         const userId = sessionStorage.getItem('userId');
+         if (!userId) {
+             console.error("User ID not set!");
+             return;
+         }
+
+         const endTime = new Date(); // Record the end time
+         const timeSpent = Math.round((endTime - startTime) / 1000); // Calculate time spent in seconds
+
+         const data = {
+             eventType: "BUTTON_CLICK",
+             page: page,
+             buttonClicked: section,
+             timeSpent: timeSpent,
+             timestamp: endTime.toISOString(),
+             userId: userId
+         };
+
+         fetch('/api/events/log', {
+             method: 'POST',
+             headers: {
+                 'Content-Type': 'application/json'
+             },
+             body: JSON.stringify(data)
+         })
+             .then(response => {
+                 if (response.ok) {
+                     console.log(`Logged "${section}" click on page: ${page}, Time Spent: ${timeSpent}s`);
+                 } else {
+                     console.error("Failed to log event.");
+                 }
+             })
+             .catch(error => console.error("Error logging event:", error));
+
+         const href = event.target.closest("a").getAttribute("href");
+         if (href) {
+             window.location.href = href;
+         }
+     }
+
 
 
 
