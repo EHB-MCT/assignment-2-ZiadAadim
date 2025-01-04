@@ -43,6 +43,10 @@ class CourseController(val repository: InteractionRepository) {
     fun referencePage(): String {
         return "reference"
     }
+    @GetMapping("/analytics")
+    fun analyticsPage(): String {
+        return "analytics"
+    }
 
     @Controller
     class CourseController {

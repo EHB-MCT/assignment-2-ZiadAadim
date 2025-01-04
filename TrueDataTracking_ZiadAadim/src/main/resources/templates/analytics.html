@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics</title>
+    <link rel="stylesheet" th:href="@{/css/css/analytics.css}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<header>
+    <h1>Application Analytics</h1>
+</header>
+<section class="chart-container">
+    <canvas id="navigationPathChart" class="large-chart"></canvas>
+    <div class="small-charts-row">
+        <canvas id="timeSpentChart" class="small-chart"></canvas>
+        <canvas id="goBackRatesChart" class="small-chart"></canvas>
+    </div>
+</section>
+<script th:src="@{/css/css/js/analytics.js}"></script>
+</body>
+</html>

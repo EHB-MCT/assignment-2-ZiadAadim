@@ -1,0 +1,58 @@
+/* General Styling */
+body {
+    background-color: darkslategrey;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Header Styling */
+header {
+    margin-bottom: 40px;
+    text-align: center;
+    color: white;
+}
+
+/* Container for Charts */
+.chart-container {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    align-items: center;
+    margin: 20px auto;
+    max-width: 1200px; /* Limit maximum width for layout */
+    padding: 20px;
+}
+
+/* Large Chart Styling */
+.large-chart {
+    width: 100%; /* Full width for the larger chart */
+    max-width: 1000px; /* Limit the width */
+    height: 400px; /* Set a fixed height */
+}
+
+/* Small Charts Row */
+.small-charts-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    width: 100%;
+    max-width: 1000px;
+}
+
+/* Small Chart Styling */
+/* Small Chart Styling */
+.small-chart {
+    flex: 1;
+    max-width: 48%; /* Two charts side by side */
+    height: 250px; /* Reduce the height */
+    max-height: 400px; /* Limit the height to prevent elongation */
+}
+
+canvas {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
