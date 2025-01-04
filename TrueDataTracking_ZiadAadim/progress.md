@@ -30,3 +30,14 @@
 - Fixed issues where cards were non-clickable, ensuring smooth interaction throughout the website.
 - Updated database integration to log all events with the correct `userId`.
 - Tested the system thoroughly to ensure data is accurately logged in MongoDB for every user interaction.
+
+## Checkpoint 5: Time Spent and "Go Back" Button Tracking
+- Enhanced the data tracking system to log the time spent on each page.
+- Timer starts when a page is loaded and stops when a card or the "Go Back" button is clicked.
+- Calculated the time spent in seconds and logged it into MongoDB.
+- Updated the "Go Back" button to be included in the tracking system.
+- Logged "Go Back" actions with the associated page and time spent.
+- Ensured smooth redirection after logging.
+- Standardized the `logCardClick` function across all pages to handle tracking for both card clicks and the "Go Back" button.
+- Verified that time spent on pages and "Go Back" actions are accurately recorded in MongoDB for each user interaction.
+- Prepared the system for future visualization of navigation paths and user behavior analytics.
