@@ -49,4 +49,9 @@ class AnalyticsController(private val userEventService: UserEventService) {
     fun getNavigationPathData(): Map<String, Int> {
         return userEventService.getFirstNavigationPaths()
     }
+
+    @GetMapping("/go-back-rates")
+    fun getGoBackRatesData(): Map<String, Int> {
+        return userEventService.getGoBackActions()
+    }
 }

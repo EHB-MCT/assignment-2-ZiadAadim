@@ -97,6 +97,15 @@ class UserEventService(private val userEventRepository: UserEventRepository) {
         return firstNavigations.groupingBy { it }.eachCount() // Count occurrences of each first navigation
     }
 
+    fun getGoBackActions(): Map<String, Int> {
+        return userEventRepository.findAll()
+            .filter { it.buttonClicked == "Go Back" && it.page != null } // Only consider "Go Back" actions
+            .groupBy { it.page!! } // Group by page
+            .mapValues { entry ->
+                entry.value.size // Count the number of "Go Back" actions for each page
+            }
+    }
+
 
 
 }

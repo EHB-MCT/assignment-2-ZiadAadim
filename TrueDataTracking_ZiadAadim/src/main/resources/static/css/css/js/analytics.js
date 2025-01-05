@@ -107,6 +107,24 @@ document.addEventListener("DOMContentLoaded", () => {
                     },
                     options: {
                         responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: (context) => {
+                                        const value = context.raw;
+                                        return `${context.label}: ${value} times`;
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
                     }
                 });
             })
@@ -150,5 +168,6 @@ document.addEventListener("DOMContentLoaded", () => {
     loadGoBackRatesChart();
     loadUserStats();
 });
+
 
 
