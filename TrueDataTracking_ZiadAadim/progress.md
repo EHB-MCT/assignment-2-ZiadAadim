@@ -47,3 +47,23 @@
 - Populate the charts (`navigationPathChart`, `timeSpentChart`, and `goBackRatesChart`) with real-time or aggregated data from MongoDB.
 - Ensure data aggregation and processing (e.g., grouping by `userId`, summing `timeSpent`, calculating `go-back` rates) is implemented in the backend.
 - Add a loading indicator to the `analytics.html` page to handle the time delay while fetching data.
+
+
+## Checkpoint 7: Advanced Analytics and Chart Fixes
+- Implemented a **Navigation Path Chart** to visualize the first button clicks after the "Home" page.
+  - Added a backend endpoint (`/api/analytics/navigation-path`) to aggregate and fetch data for the first navigation actions.
+  - Dynamically populated the chart with pages (`Anatomy`, `Gesture`, `Perspective`) and their respective counts.
+  - Ensured the chart is responsive and displays accurate data.
+
+- Fixed the **Go Back Actions Chart** to show the correct number of "Go Back" actions for each page.
+  - Added a backend endpoint (`/api/analytics/go-back-rates`) to aggregate "Go Back" actions per page.
+  - Updated the frontend to fetch and display this data dynamically.
+  - Ensured tooltips show the number of actions for each page.
+
+- Verified both charts fetch data dynamically from MongoDB and display accurate results.
+
+- Retained responsiveness and consistent design across all charts:
+  - Used Chart.js features for dynamic tooltips and legends.
+  - Ensured proper error handling for API calls to prevent UI issues.
+
+- Updated the frontend to keep the design aligned with existing pages.
