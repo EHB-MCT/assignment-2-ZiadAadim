@@ -54,4 +54,16 @@ class AnalyticsController(private val userEventService: UserEventService) {
     fun getGoBackRatesData(): Map<String, Int> {
         return userEventService.getGoBackActions()
     }
+
+    @GetMapping("/user/{userId}/details")
+    fun getUserDetails(@PathVariable userId: String): Map<String, Any> {
+        val navigationPath = userEventService.getUserNavigationPath(userId)
+        val timeSpent = userEventService.getTimeSpentByCategory(userId)
+        val mostTimeSpent = timeSpent.maxByOrNull { it.value }?.key ?: "N/A"
+        return mapOf(
+            "navigationPath" to navigationPath.map { it.first },
+            "timeSpent" to timeSpent,
+            "mostTimeSpent" to mostTimeSpent
+        )
+    }
 }

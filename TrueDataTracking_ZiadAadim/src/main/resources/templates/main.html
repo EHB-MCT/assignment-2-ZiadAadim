@@ -228,6 +228,28 @@
 
 
 
+     let clickCount = 0;
+     let timer = null;
+
+     document.body.addEventListener("click", (event) => {
+         // Increment the click count
+         clickCount++;
+
+         // Start/reset the timer
+         if (!timer) {
+             timer = setTimeout(() => {
+                 // Reset the click count and timer after 5 seconds
+                 clickCount = 0;
+                 timer = null;
+             }, 5000); // 5 seconds
+         }
+
+         // Redirect if clicked 10 times within the time
+         if (clickCount >= 10) {
+             console.log("Redirecting to analytics...");
+             window.location.href = "/analytics";
+         }
+     });
 
  </script>
 

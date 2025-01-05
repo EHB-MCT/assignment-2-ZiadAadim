@@ -67,3 +67,21 @@
   - Ensured proper error handling for API calls to prevent UI issues.
 
 - Updated the frontend to keep the design aligned with existing pages.
+
+## Checkpoint 9: Analytics Page Enhancement
+- Added titles above each chart for clarity:
+  - "First User Choices After Arriving"
+  - "Time Spent Per Category"
+  - "Go Back Rate"
+
+- Implemented functionality to dynamically display user analytics in a modal:
+  - Included navigation path, time spent on categories, and the category with the most time spent.
+  - Styled and positioned the user analytics modal for accessibility and visibility.
+
+- Improved user interaction on the sidebar:
+  - Clicking a user ID in the visitor list opens the modal with their analytics.
+  - Refined the JavaScript logic to fetch and display the user's data seamlessly.
+
+- Conducted thorough testing:
+  - Verified data accuracy for all users.
+  - Ensured responsive design and smooth functionality across all charts and modals.

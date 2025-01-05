@@ -1,6 +1,3 @@
-console.log('test')
-
-
 document.addEventListener("DOMContentLoaded", () => {
     // Contexts for the charts
     const navigationCtx = document.getElementById("navigationPathChart").getContext("2d");
@@ -167,7 +164,38 @@ document.addEventListener("DOMContentLoaded", () => {
     loadTimeSpentChart();
     loadGoBackRatesChart();
     loadUserStats();
+
+    const userList = document.getElementById("user-list");
+    const modal = document.getElementById("user-details-modal");
+    const closeModalBtn = document.getElementById("close-modal-btn");
+
+    const loadUserDetails = (userId) => {
+        document.getElementById("user-navigation-path").previousElementSibling.textContent = `User ID: ${userId}`;
+        fetch(`/api/analytics/user/${userId}/details`)
+            .then((response) => response.json())
+            .then((data) => {
+                document.getElementById("user-navigation-path").textContent = ["Home", ...data.navigationPath].join(" -> ");
+                document.getElementById("time-spent-anatomy").textContent = data.timeSpent.Anatomy || 0;
+                document.getElementById("time-spent-gesture").textContent = data.timeSpent.Gesture || 0;
+                document.getElementById("time-spent-perspective").textContent = data.timeSpent.Perspective || 0;
+                document.getElementById("most-time-spent").textContent = data.mostTimeSpent || "N/A";
+                modal.style.display = "flex"; // Show the modal
+            })
+            .catch((error) => console.error("Error fetching user details:", error));
+    };
+
+    userList.addEventListener("click", (event) => {
+        if (event.target.tagName === "LI") {
+            const userId = event.target.textContent;
+            loadUserDetails(userId);
+        }
+    });
+
+    closeModalBtn.addEventListener("click", () => {
+        modal.style.display = "none"; // Hide the modal
+    });
 });
+
 
 
 

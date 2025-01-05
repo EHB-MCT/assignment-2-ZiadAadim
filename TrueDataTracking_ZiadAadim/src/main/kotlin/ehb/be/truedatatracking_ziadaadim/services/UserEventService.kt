@@ -106,6 +106,11 @@ class UserEventService(private val userEventRepository: UserEventRepository) {
             }
     }
 
-
-
+    fun getTimeSpentByCategory(userId: String): Map<String, Long> {
+        val events = userEventRepository.findAllByUserId(userId)
+        val categories = listOf("Anatomy", "Gesture", "Perspective")
+        return events.filter { it.page in categories }
+            .groupBy { it.page!! }
+            .mapValues { entry -> entry.value.sumOf { it.timeSpent ?: 0L } }
+    }
 }

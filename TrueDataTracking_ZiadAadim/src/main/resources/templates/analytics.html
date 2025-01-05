@@ -20,13 +20,38 @@
         </div>
     </aside>
     <div class="chart-container">
+        <!-- Navigation Path Chart -->
+        <h2 class="chart-title">First User Choices After Arriving</h2>
         <canvas id="navigationPathChart" class="large-chart"></canvas>
+
+        <!-- Time Spent Chart -->
+        <h2 class="chart-title">Time Spent Per Category   -   Go Back Rate</h2>
         <div class="small-charts-row">
             <canvas id="timeSpentChart" class="small-chart"></canvas>
+
+            <!-- Go Back Rates Chart -->
             <canvas id="goBackRatesChart" class="small-chart"></canvas>
+        </div>
+    </div>
+
+    <!-- User Details Modal -->
+    <div id="user-details-modal" class="modal">
+        <div class="modal-content">
+            <h2>User Analytics</h2>
+            <p><strong>Navigation Path:</strong> <span id="user-navigation-path">N/A</span></p>
+            <p><strong>Time Spent:</strong></p>
+            <ul>
+                <li>Anatomy: <span id="time-spent-anatomy">0</span> seconds</li>
+                <li>Gesture: <span id="time-spent-gesture">0</span> seconds</li>
+                <li>Perspective: <span id="time-spent-perspective">0</span> seconds</li>
+            </ul>
+            <p><strong>Most Time Spent On:</strong> <span id="most-time-spent">N/A</span></p>
+            <button id="close-modal-btn">Close</button>
         </div>
     </div>
 </section>
 <script th:src="@{/css/css/js/analytics.js}"></script>
+
+
 </body>
 </html>
