@@ -2,77 +2,107 @@ console.log('test')
 
 
 document.addEventListener("DOMContentLoaded", () => {
-    // Example Chart.js setup
+    // Contexts for the charts
     const navigationCtx = document.getElementById("navigationPathChart").getContext("2d");
     const timeSpentCtx = document.getElementById("timeSpentChart").getContext("2d");
     const goBackRatesCtx = document.getElementById("goBackRatesChart").getContext("2d");
 
     // Navigation Path Chart
-    new Chart(navigationCtx, {
-        type: 'bar',
-        data: {
-            labels: ['Main page', 'Anatomy', 'Gesture', 'Perspective'],
-            datasets: [{
-                label: 'Navigation Path Frequency',
-                data: [10, 5, 8, 4],
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                borderColor: 'rgba(75, 192, 192, 1)',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: true,
-        }
-    });
+    const loadNavigationChart = () => {
+        fetch("/api/analytics/navigation-path")
+            .then(response => response.json())
+            .then(data => {
+                const labels = Object.keys(data); // Pages
+                const values = Object.values(data); // Frequency
+
+                new Chart(navigationCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Navigation Path Frequency',
+                            data: values,
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                    }
+                });
+            })
+            .catch(error => console.error("Error fetching navigation path data:", error));
+    };
 
     // Time Spent Chart
-    new Chart(timeSpentCtx, {
-        type: 'pie',
-        data: {
-            labels: ['Main page', 'Anatomy', 'Gesture', 'Perspective'],
-            datasets: [{
-                label: 'Time Spent',
-                data: [150, 50, 80, 30],
-                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0']
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false, // Disable maintaining the aspect ratio
-            plugins: {
-                legend: {
-                    position: 'top',
-                }
-            },
-            layout: {
-                padding: {
-                    top: 10,
-                    bottom: 10,
-                }
-            }
-        }
-    });
+    const loadTimeSpentChart = () => {
+        fetch("/api/analytics/time-spent")
+            .then(response => response.json())
+            .then(data => {
+                const labels = Object.keys(data); // Pages
+                const timeSpentData = Object.values(data); // Time spent on each page
+
+                new Chart(timeSpentCtx, {
+                    type: 'pie',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Time Spent',
+                            data: timeSpentData,
+                            backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0']
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: (context) => {
+                                        const value = context.raw;
+                                        return `${context.label}: ${value} seconds`;
+                                    }
+                                }
+                            }
+                        },
+                    }
+                });
+            })
+            .catch(error => console.error("Error fetching time spent data:", error));
+    };
 
     // Go Back Rates Chart
-    new Chart(goBackRatesCtx, {
-        type: 'line',
-        data: {
-            labels: ['Anatomy', 'Gesture', 'Perspective'],
-            datasets: [{
-                label: 'Go Back Actions',
-                data: [3, 4, 2],
-                backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                borderColor: 'rgba(255, 99, 132, 1)',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: true,
-        }
-    });
-});
+    const loadGoBackRatesChart = () => {
+        fetch("/api/analytics/go-back-rates")
+            .then(response => response.json())
+            .then(data => {
+                const labels = Object.keys(data); // Pages
+                const values = Object.values(data); // Go-back actions
 
-document.addEventListener("DOMContentLoaded", () => {
+                new Chart(goBackRatesCtx, {
+                    type: 'line',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Go Back Actions',
+                            data: values,
+                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                            borderColor: 'rgba(255, 99, 132, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                    }
+                });
+            })
+            .catch(error => console.error("Error fetching go-back rates data:", error));
+    };
+
     // Button to clear the database
     const clearDataBtn = document.getElementById("clear-data-btn");
     clearDataBtn.addEventListener("click", () => {
@@ -104,6 +134,10 @@ document.addEventListener("DOMContentLoaded", () => {
             .catch(error => console.error("Error fetching user stats:", error));
     };
 
-    // Initial load
+    // Initial loads for charts and user stats
+    loadNavigationChart();
+    loadTimeSpentChart();
+    loadGoBackRatesChart();
     loadUserStats();
 });
+

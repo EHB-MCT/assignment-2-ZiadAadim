@@ -66,4 +66,19 @@ class UserEventService(private val userEventRepository: UserEventRepository) {
     fun getAllUserIds(): List<String> {
         return userEventRepository.findAll().map { it.userId }.distinct()
     }
+
+
+
+    fun getTimeSpentForSpecificPages(): Map<String, Long> {
+        val allowedPages = setOf("Anatomy", "Gesture", "Perspective")
+        return userEventRepository.findAll()
+            .filter { it.page != null && it.page in allowedPages } // Exclude null pages and filter for allowed pages
+            .groupBy { it.page!! } // Use non-null assertion after filtering nulls
+            .mapValues { entry ->
+                entry.value.sumOf { it.timeSpent ?: 0L } // Sum the time spent for each page
+            }
+    }
+
+
+
 }

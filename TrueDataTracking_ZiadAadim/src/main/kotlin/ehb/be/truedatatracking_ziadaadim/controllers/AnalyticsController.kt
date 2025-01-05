@@ -39,4 +39,9 @@ class AnalyticsController(private val userEventService: UserEventService) {
             "userIds" to userIds
         )
     }
+
+    @GetMapping("/time-spent")
+    fun getTimeSpentData(): Map<String, Long> {
+        return userEventService.getTimeSpentForSpecificPages()
+    }
 }
