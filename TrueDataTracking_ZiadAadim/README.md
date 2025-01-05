@@ -21,6 +21,11 @@ This project is part of a larger goal to develop an interactive drawing course a
 - **Administrative Features**:
     - Clear all tracked data with a single button click.
     - Total user count and user ID listing.
+  
+## About the analytics page
+
+- Click 10 times in rapid succession on the background and this will get you to the analytics page
+- On the analytics page
 
 ## Technologies Used
 - **Backend**: Spring Boot, Kotlin, MongoDB (Atlas)
