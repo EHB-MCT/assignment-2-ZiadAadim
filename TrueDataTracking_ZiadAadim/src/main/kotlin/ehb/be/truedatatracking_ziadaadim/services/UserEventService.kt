@@ -79,6 +79,24 @@ class UserEventService(private val userEventRepository: UserEventRepository) {
             }
     }
 
+    fun getFirstNavigationPaths(): Map<String, Int> {
+        val allEvents = userEventRepository.findAll()
+            .filter { it.page != null && it.buttonClicked != null } // Exclude nulls
+
+        val firstNavigations = allEvents
+            .groupBy { it.userId } // Group events by user
+            .mapValues { entry ->
+                entry.value.sortedBy { it.timestamp } // Sort events by timestamp for each user
+            }
+            .mapValues { entry ->
+                entry.value.find { it.page == "Main page" }?.buttonClicked ?: "Unknown" // Get the first button clicked after "Home"
+            }
+            .values
+            .filter { it in listOf("Anatomy", "Perspective", "Gesture") } // Include valid paths only
+
+        return firstNavigations.groupingBy { it }.eachCount() // Count occurrences of each first navigation
+    }
+
 
 
 }

@@ -44,4 +44,9 @@ class AnalyticsController(private val userEventService: UserEventService) {
     fun getTimeSpentData(): Map<String, Long> {
         return userEventService.getTimeSpentForSpecificPages()
     }
+
+    @GetMapping("/navigation-path")
+    fun getNavigationPathData(): Map<String, Int> {
+        return userEventService.getFirstNavigationPaths()
+    }
 }

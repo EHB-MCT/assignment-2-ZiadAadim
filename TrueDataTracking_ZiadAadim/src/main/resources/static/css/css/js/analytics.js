@@ -12,23 +12,33 @@ document.addEventListener("DOMContentLoaded", () => {
         fetch("/api/analytics/navigation-path")
             .then(response => response.json())
             .then(data => {
-                const labels = Object.keys(data); // Pages
-                const values = Object.values(data); // Frequency
+                const labels = Object.keys(data); // Pages like Anatomy, Gesture, Perspective
+                const values = Object.values(data); // Count of first navigations
 
                 new Chart(navigationCtx, {
                     type: 'bar',
                     data: {
                         labels: labels,
                         datasets: [{
-                            label: 'Navigation Path Frequency',
+                            label: 'First Navigation from Home',
                             data: values,
-                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                            borderColor: 'rgba(75, 192, 192, 1)',
+                            backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+                            borderColor: ['#FF6384', '#36A2EB', '#FFCE56'],
                             borderWidth: 1
                         }]
                     },
                     options: {
                         responsive: true,
+                        plugins: {
+                            legend: {
+                                display: false // Disable legend for simplicity
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
                     }
                 });
             })
@@ -140,4 +150,5 @@ document.addEventListener("DOMContentLoaded", () => {
     loadGoBackRatesChart();
     loadUserStats();
 });
+
 
