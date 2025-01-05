@@ -30,11 +30,11 @@ This project is part of a larger goal to develop an interactive drawing course a
 ## Resources
 - This project was made possible using the following resources:
 
-- **Stack Overflow**: For debugging and technical solutions.
-- **ChatGPT**: As overall assistant, debugging and technical solutions.
-- **Mike Derycke's Web 2 Course**: For mongoDB use.
-- **Chart.js**: For creating interactive and dynamic charts.
-- **MongoDB Documentation**: For database integration and queries.
+- **Stack Overflow**: For debugging and technical solutions. (https://stackoverflow.com/questions/54085641/external-js-file-not-working-within-my-html-file , https://stackoverflow.com/questions/51280364/how-to-get-html-input-in-kotlin , https://stackoverflow.com/questions/65281190/i-cant-link-my-css-file-to-my-html-file-and-i-couldnt-find-the-solution-to-my)
+- **ChatGPT**: As overall assistant, debugging and technical solutions. (www.chatgpt.com)
+- **Mike Derycke's Web 2 Course**: For mongoDB use. (https://www.youtube.com/watch?v=EotWjOiCYoE&t=467s)
+- **Chart.js**: For creating interactive and dynamic charts. (https://www.chartjs.org/docs/latest/getting-started/)
+- **MongoDB Documentation**: For database integration and queries. (https://www.mongodb.com/docs/atlas/getting-started/)
 
 ## Installation
 1. Clone the repository:
