@@ -41,3 +41,9 @@
 - Standardized the `logCardClick` function across all pages to handle tracking for both card clicks and the "Go Back" button.
 - Verified that time spent on pages and "Go Back" actions are accurately recorded in MongoDB for each user interaction.
 - Prepared the system for future visualization of navigation paths and user behavior analytics.
+
+## Checkpoint 6: Dynamic Data Integration
+- Fetch aggregated data from the backend for charts dynamically using an API endpoint.
+- Populate the charts (`navigationPathChart`, `timeSpentChart`, and `goBackRatesChart`) with real-time or aggregated data from MongoDB.
+- Ensure data aggregation and processing (e.g., grouping by `userId`, summing `timeSpent`, calculating `go-back` rates) is implemented in the backend.
+- Add a loading indicator to the `analytics.html` page to handle the time delay while fetching data.

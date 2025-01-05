@@ -71,3 +71,39 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+    // Button to clear the database
+    const clearDataBtn = document.getElementById("clear-data-btn");
+    clearDataBtn.addEventListener("click", () => {
+        if (confirm("Are you sure you want to delete all data?")) {
+            fetch("/api/analytics/clear", { method: "DELETE" })
+                .then(response => response.text())
+                .then(message => {
+                    alert(message);
+                    loadUserStats(); // Refresh user stats after clearing
+                })
+                .catch(error => console.error("Error clearing data:", error));
+        }
+    });
+
+    // Load user statistics
+    const loadUserStats = () => {
+        fetch("/api/analytics/user-stats")
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("user-count").textContent = data.userCount;
+                const userList = document.getElementById("user-list");
+                userList.innerHTML = ""; // Clear existing list
+                data.userIds.forEach(userId => {
+                    const li = document.createElement("li");
+                    li.textContent = userId;
+                    userList.appendChild(li);
+                });
+            })
+            .catch(error => console.error("Error fetching user stats:", error));
+    };
+
+    // Initial load
+    loadUserStats();
+});

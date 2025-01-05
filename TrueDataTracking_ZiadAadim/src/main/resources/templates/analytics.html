@@ -11,11 +11,20 @@
 <header>
     <h1>Application Analytics</h1>
 </header>
-<section class="chart-container">
-    <canvas id="navigationPathChart" class="large-chart"></canvas>
-    <div class="small-charts-row">
-        <canvas id="timeSpentChart" class="small-chart"></canvas>
-        <canvas id="goBackRatesChart" class="small-chart"></canvas>
+<section class="analytics-container">
+    <aside class="sidebar">
+        <button id="clear-data-btn">Clear All Data</button>
+        <div id="user-stats">
+            <h2>Total Visitors: <span id="user-count">0</span></h2>
+            <ul id="user-list"></ul>
+        </div>
+    </aside>
+    <div class="chart-container">
+        <canvas id="navigationPathChart" class="large-chart"></canvas>
+        <div class="small-charts-row">
+            <canvas id="timeSpentChart" class="small-chart"></canvas>
+            <canvas id="goBackRatesChart" class="small-chart"></canvas>
+        </div>
     </div>
 </section>
 <script th:src="@{/css/css/js/analytics.js}"></script>
